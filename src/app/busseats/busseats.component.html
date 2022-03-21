@@ -1,0 +1,35 @@
+
+<div class="customer">
+     
+<div><br><br><br>
+    <h3>Bus Booking Details</h3>
+    <div style="display:inline">
+    <input type="text" style="background-color:aquamarine" value="BUSID" disabled>&nbsp;
+    <input type="text" value="{{bid}}" disabled>
+    </div><br>
+    <div style="display:inline">
+        <input type="text" style="background-color:aquamarine" value="BUS NAME" disabled>&nbsp;
+        <input type="text" value="{{bname}}" disabled>
+    </div><br>
+    <div style="display:inline">
+            <input type="text" style="background-color:aquamarine" value="FROM CITY" disabled>&nbsp;
+            <input type="text" value="{{fcity}}" disabled>
+    </div><br>
+    <div style="display:inline">
+        <input type="text" style="background-color:aquamarine" value="TO CITY" disabled>&nbsp;
+        <input type="text" value="{{tcity}}" disabled>
+    </div><br>
+    <div style="display:inline">
+        <input type="text" style="background-color:aquamarine" value="DOJ" disabled>&nbsp;
+        <input type="text" value="{{djourn}}" disabled>
+    </div><br>
+</div><br>
+<div style="width:300px"> 
+<div *ngFor="let vh of vehicleList" style="display:inline"> 
+<input style="width:20px;height:20px" type="checkbox" (change)="onChange(vh,$event)"/> &nbsp;
+<button style="background-color:blueviolet;color:white" disabled>{{vh.sno}}</button> &nbsp;
+</div>
+</div><br>
+
+<div style="float:right"><button (click)="bookTicket()" >Book</button></div>
+</div>

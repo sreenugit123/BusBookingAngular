@@ -1,0 +1,32 @@
+<html>
+    <style>
+        body {background-color:bisque; }
+    </style>
+<body>
+<p style="text-align:center;font-size:40px;color:blue">Results</p>
+
+
+    <table border="2" style="margin-left:60px;width:90%;margin-right:10px">
+        <tr style="width:20%"><td style="font-size:20px;"><b>Bus ID</b></td>
+            <td style="font-size:20px"><b>Bus Name</b></td>
+            <td style="font-size:20px"><b>From City</b></td>
+            <td style="font-size:20px"><b>To City</b></td>
+            <td style="font-size:20px"><b>Driver Id</b></td>
+            <td style="font-size:20px"><b>Doj</b></td>
+            <td style="font-size:20px"><b>No of Seats</b></td>
+            <td style="font-size:20px"><b>Price</b></td></tr>
+        <tr *ngFor="let vh of vehicleList">
+            <td style="font-size:20px">{{vh.bid}}</td>
+            <td style="font-size:20px">{{ vh.bname}}</td>
+            <td style="font-size:20px">{{ vh.fcity}}</td>
+            <td style="font-size:20px">{{ vh.tcity}}</td>
+            <td style="font-size:20px">{{vh.did}}</td>
+            <td style="font-size:20px">{{vh.djourn}}</td>
+            <td style="font-size:20px">{{vh.noseats}}</td>
+            <td style="font-size:20px">{{vh.tprice}}</td>
+            <td style="font-size:20px"><button (click)="checkmethod(vh)">Book</button></td>
+        </tr> 
+        </table>
+
+</body>
+</html>
