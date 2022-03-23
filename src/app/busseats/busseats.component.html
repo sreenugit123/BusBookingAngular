@@ -25,11 +25,11 @@
     </div><br>
 </div><br>
 <div style="width:300px"> 
-<div *ngFor="let vh of vehicleList" style="display:inline"> 
-<input style="width:20px;height:20px" type="checkbox" (change)="onChange(vh,$event)"/> &nbsp;
+<div *ngFor="let vh of finalBusSeats" style="display:inline"> 
+<input style="width:20px;height:20px" type="radio" name="seatno" (click)="radio(vh)" [disabled]="vh.booked"/> &nbsp;
 <button style="background-color:blueviolet;color:white" disabled>{{vh.sno}}</button> &nbsp;
 </div>
 </div><br>
 
-<div style="float:right"><button (click)="bookTicket()" >Book</button></div>
+<div style="float:right"><button (click)="bookTicket()" [disabled]="bookButton" >Book</button></div>
 </div>

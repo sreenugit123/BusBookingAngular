@@ -10,7 +10,6 @@ export class BusbookingService {
 
   restUrl:string="http://localhost:9096/rest/api";
   newUrl:string="http://localhost:9096/new/api";
-  bookUrl:string="http://localhost:9094/book/api"
 
   getBuses()
   {
@@ -26,7 +25,7 @@ export class BusbookingService {
   addCustomer(book:any){
     return this.myhttp.get(this.restUrl+"/busdetails/")
   }
-  getBookingdetails(){
-    return this.myhttp.get(this.bookUrl+"/abus")
-  }
+   getBusSearchDetails(fcity:string,tcity:string,date:string){
+    return this.myhttp.get(this.restUrl+"/busdetails/"+fcity+"/"+tcity+"/"+date)
+}
 }

@@ -19,15 +19,16 @@ export class BusseatsComponent implements OnInit {
   public busDetails:Busdetails;
   public check:any;
   public checkData:any;
-  public noOfSeats:number;
   public seatsSelected:string;
+  public bookButton:boolean;
   tPrice: any;
+  public finalBusSeats:any;
   constructor(private bks:BusbookingService, private route:ActivatedRoute) { 
     this.checkData=[];
-    this.noOfSeats=0;
     this.seatsSelected='';
     this.vehicleList=[];
     this.busDetails=new Busdetails();
+    this.bookButton=true;
   }
 
   ngOnInit(): void {
@@ -36,10 +37,25 @@ export class BusseatsComponent implements OnInit {
          this.bks.getBusseats(this.check).subscribe(
           (data)=>{
               console.log(data);
+              this.finalBusSeats=[];
               let dataArr:any;
               dataArr=data;
               this.vehicleList=dataArr;
+              
+              this.vehicleList.forEach((element:any) => {
+                this.finalBusSeats.push({
+                  "bid":element.bid,
+                  "sno":element.sno,
+                  "sstatus":element.sstatus,
+                  "booked":false
+                })
+              });
 
+              this.finalBusSeats.forEach((element:any)=>{
+                 if(element.sstatus==="booked"){
+                   element.booked=true;
+                 }
+              })
           },
           (error)=>
           {
@@ -48,7 +64,6 @@ export class BusseatsComponent implements OnInit {
         )
         this.bks.getBusDetails(this.check).subscribe(
           (data)=>{
-              console.log(data);
               let datadetails:any;
               datadetails=data;
               this.busDetails=datadetails;
@@ -65,24 +80,15 @@ export class BusseatsComponent implements OnInit {
           }
         )
   }
-  onChange(seatData:Busseats,isChecked:any){
-    let checked= isChecked.target.checked;
-    if(checked){
-         this.checkData.push(seatData.sno);
-    } else{
-      const index = this.checkData.findIndex((x:any)=>x===seatData.sno);
-      this.checkData.splice(index,1);
-    }
-    console.log(this.checkData.length);
-    console.log(this.checkData.toString());
-    this.noOfSeats=this.checkData.length;
+  radio(seatData:Busseats){
+    this.bookButton=false;
+    this.checkData=seatData.sno;
     this.seatsSelected=this.checkData.toString();
   }
 
   bookTicket(){
-    this.tPrice=Number(this.noOfSeats)*this.tPrice;
-    localStorage.setItem('noOfSeatsBooked',(this.noOfSeats).toString());
     localStorage.setItem('SeatNo',(this.seatsSelected).toString());
     localStorage.setItem('TicketPrice',(this.tPrice).toString());
+
   }
 }
